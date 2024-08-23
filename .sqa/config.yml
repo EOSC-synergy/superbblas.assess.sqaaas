@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/eromero-vlc/superbblas:
+      branch: master
+      repo: https://github.com/eromero-vlc/superbblas
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/eromero-vlc/superbblas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-periwinkle-oyster.sh
+        container: qc.acc_muggy-olivine-hyena
+  QC.Doc:
+    repos:
+      github.com/eromero-vlc/superbblas find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-khaki-spitz.sh
+        container: qc.doc_sleazy-smalt-beetle
+      github.com/eromero-vlc/superbblas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-heliotrope-tapir.sh
+        container: qc.doc_paltry-vermilion-woodpecker
+      github.com/eromero-vlc/superbblas restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-maroon-collie.sh
+        container: qc.doc_sloppy-brown-bonobo
+  QC.Lic:
+    repos:
+      github.com/eromero-vlc/superbblas licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-cyan-cow.sh
+        container: qc.lic_randy-corn-mastiff
+  QC.Sec:
+    repos:
+      github.com/eromero-vlc/superbblas bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-periwinkle-harrier.sh
+        container: qc.sec_foggy-sapphire-bear
+  QC.Sty:
+    repos:
+      github.com/eromero-vlc/superbblas flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-burgundy-dog.sh
+        container: qc.sty_randy-orange-hound
+  QC.Uni:
+    repos:
+      github.com/eromero-vlc/superbblas pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-mauve-civet.sh
+        container: qc.uni_silly-ivory-insect
+  QC.Ver:
+    repos:
+      github.com/eromero-vlc/superbblas get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-gold-robin.sh
+        container: qc.ver_zippy-fuchsia-boar
+timeout: 5400
